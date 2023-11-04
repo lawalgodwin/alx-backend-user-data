@@ -21,7 +21,7 @@ from typing import List
 import re
 import logging
 
-PII_FIELDS = ("ssn", "password", "email", "phone", "ip")
+PII_FIELDS = ("ssn", "password", "email", "phone", "name")
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
