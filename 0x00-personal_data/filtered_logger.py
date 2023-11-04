@@ -17,11 +17,12 @@ filter_datum should be less than 5 lines long and use re.sub to
 perform the substitution with a single regex
 """
 
-from typing import List
+from typing import Sequence, Tuple
 import re
+import logging
 
 
-def filter_datum(fields: List[str], redaction: str, message: str,
+def filter_datum(fields: Sequence[str], redaction: str, message: str,
                  separator: str) -> str:
     """Obfucate data by the given field"""
     for field in fields:
@@ -29,3 +30,24 @@ def filter_datum(fields: List[str], redaction: str, message: str,
                          f'{field}={redaction}{separator}',
                          message)
     return message
+
+
+class RedactingFormatter(logging.Formatter):
+    """ Redacting Formatter class
+    """
+
+    REDACTION = "***"
+    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
+    SEPARATOR = ";"
+
+    def __init__(self, fields: Tuple[str]):
+        super(RedactingFormatter, self).__init__(self.FORMAT)
+        self.fields = fields
+
+    def format(self, record: logging.LogRecord) -> str:
+        """obfuscate and format record before logging"""
+        obfuscated_format_record = filter_datum(self.fields,
+                                                self.REDACTION,
+                                                super().format(record),
+                                                self.SEPARATOR)
+        return obfuscated_format_record
