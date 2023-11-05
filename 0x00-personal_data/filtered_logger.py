@@ -70,9 +70,7 @@ def get_logger() -> logging.Logger:
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    """Returns a connector to the mysql database
-    NB: pip3 install mysql-connector-python
-    """
+    """Returns a connector to the mysql database"""
     DB_HOST = getenv("PERSONAL_DATA_DB_HOST", "localhost")
     DB_NAME = getenv("PERSONAL_DATA_DB_NAME")
     DB_USER = getenv("PERSONAL_DATA_DB_USERNAME", "root")
