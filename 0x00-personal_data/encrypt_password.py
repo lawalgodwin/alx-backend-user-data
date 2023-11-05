@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""User passwords should NEVER be stored in plain text in a database.
+"""User passwords should NEVER be stored in plain text in databases.
 
 Implement a hash_password function that expects one string
 argument name password and returns a salted, hashed password,
