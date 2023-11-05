@@ -100,13 +100,13 @@ def main() -> None:
     logger = get_logger()
 
     for row in cursor:
-        field = "name={};"\
-                 "email={};"\
-                 "phone={};"\
-                 "ssn={};"\
-                 "password={};"\
-                 "ip={};"\
-                 "last_login={};"\
+        field = "name={}; "\
+                 "email={}; "\
+                 "phone={}; "\
+                 "ssn={}; "\
+                 "password={}; "\
+                 "ip={}; "\
+                 "last_login={}; "\
                  "user_agent={}"
         field = field.format(row[0], row[1], row[2], row[3], row[4], row[5],
                              row[6], row[7])
