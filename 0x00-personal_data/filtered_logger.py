@@ -20,6 +20,9 @@ perform the substitution with a single regex
 from typing import List
 import re
 import logging
+import mysql.connector
+from os import getenv
+# import MySQLdb (this works but mysql.connecor did not work)
 
 PII_FIELDS = ("ssn", "password", "email", "phone", "name")
 
@@ -64,3 +67,28 @@ def get_logger() -> logging.Logger:
     user_data_logger.setLevel(logging.INFO)
     user_data_logger.addHandler(loger_handler)
     return user_data_logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Returns a connector to the mysql database
+    NB: pip3 install mysql-connector-python
+    """
+    DB_HOST = getenv("PERSONAL_DATA_DB_HOST", "localhost")
+    DB_NAME = getenv("PERSONAL_DATA_DB_NAME")
+    DB_USER = getenv("PERSONAL_DATA_DB_USERNAME", "root")
+    DB_PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD", "")
+    print(F"USER: {DB_USER}")
+    print(F"PASSORD: {DB_PASSWORD}")
+    print(F"HOST: {DB_HOST}")
+    print(F"DATABASE: {DB_NAME}")
+
+    try:
+        database_connector = mysql.connector.connect(
+            host=DB_HOST,
+            user=DB_USER,
+            password=DB_PASSWORD,
+            database=DB_NAME)
+        return database_connector
+    except Exception as e:
+        print(F"Error: ", e)
+        return e
