@@ -12,6 +12,12 @@ import bcrypt
 
 
 def hash_password(password: str) -> bytes:
-    """Return a byte string of a salted hashed password"""
+    """Encrypting passwords"""
     password_in_bytes_form = bytes(password, encoding='UTF-8')
     return bcrypt.hashpw(password_in_bytes_form, bcrypt.gensalt())
+
+
+def is_valid(hashed_password: bytes, password: str) -> bool:
+    """Check valid password (confirm the validity of a password)"""
+    password_in_bytes_form = bytes(password, encoding='UTF-8')
+    return bcrypt.checkpw(password_in_bytes_form, hashed_password)
