@@ -80,9 +80,9 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
     try:
         database_connector = mysql.connector.connect(
-            host=DB_HOST,
             user=DB_USER,
             password=DB_PASSWORD,
+            host=DB_HOST,
             database=DB_NAME)
         return database_connector
     except Exception as e:
