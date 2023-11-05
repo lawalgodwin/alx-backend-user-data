@@ -79,7 +79,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     DB_USER = getenv("PERSONAL_DATA_DB_USERNAME", "root")
     DB_PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD", "")
 
-    # NB: MySQLdb.connect() works I tested it
+    # NB: MySQLdb.connect() also works I tested it
     try:
         database_connector = mysql.connector.connect(
             user=DB_USER,
