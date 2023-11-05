@@ -22,7 +22,9 @@ import re
 import logging
 import mysql.connector
 from os import getenv
-# import MySQLdb (this works but mysql.connecor did not work)
+import MySQLdb
+# 
+# (MySQLdb works but mysql.connecor did not work)
 
 PII_FIELDS = ("ssn", "password", "email", "phone", "name")
 
@@ -79,7 +81,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     DB_PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD", "")
 
     try:
-        database_connector = mysql.connector.connect(
+        database_connector = MySQLdb.connect(
             user=DB_USER,
             password=DB_PASSWORD,
             host=DB_HOST,
@@ -88,3 +90,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     except Exception as e:
         print(F"Error: ", e)
         return e
+
+def main() -> None:
+    """ Read and filter data """
+    pass
