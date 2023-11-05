@@ -23,7 +23,6 @@ import logging
 import mysql.connector
 from os import getenv
 import MySQLdb
-# 
 # (MySQLdb works but mysql.connecor did not work)
 
 PII_FIELDS = ("ssn", "password", "email", "phone", "name")
@@ -81,7 +80,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     DB_PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD", "")
 
     try:
-        database_connector = MySQLdb.connect(
+        database_connector = mysql.connector.connect(
             user=DB_USER,
             password=DB_PASSWORD,
             host=DB_HOST,
@@ -91,6 +90,31 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         print(F"Error: ", e)
         return e
 
+
 def main() -> None:
     """ Read and filter data """
-    pass
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM users')
+
+    logger = get_logger()
+
+    for row in cursor:
+        field = "name={};"\
+                 "email={};"\
+                 "phone={};"\
+                 "ssn={};"\
+                 "password={};"\
+                 "ip={};"\
+                 "last_login={};"\
+                 "user_agent={}"
+        field = field.format(row[0], row[1], row[2], row[3], row[4], row[5],
+                             row[6], row[7])
+        message = field
+        logger.info(message)
+    cursor.close()
+    db.close()
+
+
+if __name__ == '__main__':
+    main()
