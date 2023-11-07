@@ -16,8 +16,14 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
-    """Unauthorized handler"""
+    """User not authenticated handler"""
     return jsonify({"error": "Unauthorized"}), 401
+
+
+@app.errorhandler(403)
+def forbidden(error) -> str:
+    """User unthenticated but not authorised Handler"""
+    return jsonify({"error": "Forbidden"}), 403
 
 
 @app.errorhandler(404)
