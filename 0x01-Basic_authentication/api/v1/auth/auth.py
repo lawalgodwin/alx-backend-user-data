@@ -11,8 +11,16 @@ class Auth:
         """Class constructor"""
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """Docs strings"""
-        return False
+        """Define which routes don't need authentication"""
+        if path is None or (excluded_paths is None) or (excluded_paths == []):
+            return True
+
+        for ex_path in excluded_paths:
+            if ex_path in [path, path + '/']:
+                return False
+            elif ex_path.endswith('*') and path.startswith(ex_path[:-1]):
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """request will be the Flask request object"""
