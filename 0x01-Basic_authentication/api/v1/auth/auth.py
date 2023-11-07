@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Now you will create a class to manage the API authentication.
 """
-from flask import request
+from flask import request, Request
 from typing import List, TypeVar
 
 
@@ -22,10 +22,15 @@ class Auth:
                 return False
         return True
 
-    def authorization_header(self, request=None) -> str:
-        """request will be the Flask request object"""
-        return None
+    def authorization_header(self, request: Request = None) -> str:
+        """Request validation!
+        Validate all requests to secure the API.
+        """
+        auth_header = request.headers.get('Authorization')
+        if request is None or (not auth_header):
+            return None
+        return auth_header
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request: Request = None) -> TypeVar('User'):
         """request will be the Flask request object"""
         return None
