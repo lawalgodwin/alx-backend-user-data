@@ -26,7 +26,7 @@ def validate_request():
                       '/api/v1/unauthorized/',
                       '/api/v1/forbidden/']
     if auth is None:
-        pass
+        return
     isAuthRequired = auth.require_auth(request.path, excluded_paths)
     if isAuthRequired:
         if auth.authorization_header(request) is None:
