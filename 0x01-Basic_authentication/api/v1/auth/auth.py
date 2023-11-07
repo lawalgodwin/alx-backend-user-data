@@ -27,7 +27,7 @@ class Auth:
         Validate all requests to secure the API.
         """
         auth_header = request.headers.get('Authorization')
-        if request is None or (not auth_header):
+        if (request is None) or (auth_header is None):
             return None
         return auth_header
 
