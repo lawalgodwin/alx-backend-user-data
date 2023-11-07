@@ -21,7 +21,7 @@ if AUTH_TYPE == 'auth':
 
 @app.before_request
 def validate_request():
-    """A middleware that must validate request"""
+    """A middleware that must validate request """
     excluded_paths = ['/api/v1/status/',
                       '/api/v1/unauthorized/',
                       '/api/v1/forbidden/']

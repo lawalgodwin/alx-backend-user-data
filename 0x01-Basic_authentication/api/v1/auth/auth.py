@@ -32,5 +32,5 @@ class Auth:
         return auth_header
 
     def current_user(self, request: Request = None) -> TypeVar('User'):
-        """request will be the Flask request object"""
+        """request will be the Flask request object """
         return None
