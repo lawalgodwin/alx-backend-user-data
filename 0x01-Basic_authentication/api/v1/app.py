@@ -28,12 +28,11 @@ def validate_request():
     if auth is None:
         return False
     isAuthRequired = auth.require_auth(request.path, excluded_paths)
-    if not isAuthRequired:
-        pass
-    if auth.authorization_header(request) is None:
-        abort(401)
-    if auth.current_user(request) is None:
-        abort(403)
+    if isAuthRequired:
+        if auth.authorization_header(request) is None:
+            abort(401)
+        if auth.current_user(request) is None:
+            abort(403)
 
 
 @app.errorhandler(401)
