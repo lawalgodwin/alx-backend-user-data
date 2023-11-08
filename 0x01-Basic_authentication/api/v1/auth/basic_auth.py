@@ -65,3 +65,26 @@ class BasicAuth(Auth):
             return None
         except Exception:
             return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """Overload current_user method in the parent(Auth)"""
+        # check for Authorization header in request
+        try:
+            auth_header = self.authorization_header(request)
+            if auth_header is None:
+                return None
+            b64_header = self.extract_base64_authorization_header(auth_header)
+            if b64_header is None:
+                return None
+            b64_decoded = self.decode_base64_authorization_header(b64_header)
+            if b64_decoded is None:
+                return None
+            user_credentials = self.extract_user_credentials(b64_decoded)
+            if user_credentials is None:
+                return None
+            user = self.user_object_from_credentials(user_credentials)
+            if user:
+                return user
+            return None
+        except Exception:
+            return None
