@@ -23,9 +23,7 @@ class Auth:
         return True
 
     def authorization_header(self, request: Request = None) -> str:
-        """Request validation!
-        Validate all requests to secure the API.
-        """
+        """Request validation!(Validate all requests to secure the API.)"""
         auth_header = request.headers.get('Authorization')
         if (request is None) or (auth_header is None):
             return None
