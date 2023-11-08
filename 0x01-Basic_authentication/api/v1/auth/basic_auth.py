@@ -82,7 +82,7 @@ class BasicAuth(Auth):
             user_credentials = self.extract_user_credentials(b64_decoded)
             if user_credentials is None:
                 return None
-            user = self.user_object_from_credentials(user_credentials)
+            user = self.user_object_from_credentials(*user_credentials)
             if user:
                 return user
             return None
