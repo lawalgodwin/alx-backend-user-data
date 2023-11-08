@@ -22,13 +22,13 @@ class Auth:
                 return False
         return True
 
-    def authorization_header(self, request: Request = None) -> str:
+    def authorization_header(self, request=None) -> str:
         """Request validation!(Validate all requests to secure the API.)"""
         auth_header = request.headers.get('Authorization')
         if (request is None) or (auth_header is None):
             return None
         return auth_header
 
-    def current_user(self, request: Request = None) -> TypeVar('User'):
+    def current_user(self, request=None) -> TypeVar('User'):
         """request will be the Flask request object """
         return None
