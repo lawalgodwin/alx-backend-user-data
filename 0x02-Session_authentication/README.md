@@ -1,7 +1,7 @@
 # Session Authentication
-What authentication means
-What session authentication means
+- What authentication means
+- What session authentication means
 
-What Cookies are
-How to send Cookies
-How to parse Cookies
+- What Cookies are
+- How to send Cookies
+- How to parse Cookies
