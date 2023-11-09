@@ -38,6 +38,5 @@ class Auth:
         """Retreive cookie values from a request"""
         if request is None:
             return None
-        cookie_name = os.getenv('SESSION_NAME')
-        sess_cookie = request.cookies.get(cookie_name)
-        return sess_cookie
+        session_name = os.getenv('SESSION_NAME')
+        return request.cookies.get(session_name)
