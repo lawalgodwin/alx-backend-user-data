@@ -2,7 +2,7 @@
 """A module containing login handler(view)"""
 
 from api.v1.views import app_views
-from flask import request, jsonify, session
+from flask import request, jsonify, abort
 from models.user import User
 import os
 
@@ -34,3 +34,13 @@ def login():
     response = jsonify(user.to_json())
     response.set_cookie(session_cookie, session_id)
     return response
+
+
+@app_views.route('/auth_session/logout',
+                 methods=['DELETE'], strict_slashes=False)
+def logout():
+    """Handle session auth logout request"""
+    from api.v1.app import auth
+    if auth.destroy_session(request):
+        return jsonify({}), 200
+    abort(404)
