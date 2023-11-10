@@ -42,6 +42,6 @@ def logout():
     """Handle session auth logout request"""
     from api.v1.app import auth
     isSessionDeleted = auth.destroy_session(request)
-    if not isSessionDeleted:
-        abort(404)
-    return jsonify({}),
+    if isSessionDeleted:
+        return jsonify({}), 200
+    abort(404)
