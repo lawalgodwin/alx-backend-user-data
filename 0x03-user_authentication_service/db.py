@@ -8,6 +8,7 @@ from sqlalchemy.orm.session import Session
 from user import Base
 from user import User
 
+
 class DB:
     """DB class
     """
@@ -31,10 +32,7 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str):
         """Create and store a new user in the database"""
-        try:
-            new_user = User(email, hashed_password)
-            self.__session.add(new_user)
-            self.__session.commit()
-            return new_user
-        except Exception as e:
-            print(e)
+        new_user = User(email, hashed_password)
+        self.__session.add(new_user)
+        self.__session.commit()
+        return new_user
