@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """DB storage engine module
 """
 from sqlalchemy import create_engine
@@ -34,6 +35,7 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """Create and store a new user in the database"""
         new_user = User(email=email, hashed_password=hashed_password)
+        print(self.__session, "This is my session object")
         self.__session.add(new_user)
         self.__session.commit()
         return new_user
