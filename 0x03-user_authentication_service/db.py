@@ -38,7 +38,7 @@ class DB:
         self.__session.commit()
         return new_user
 
-    def find_user_by(self, **kwargs):
+    def find_user_by(self, **kwargs) -> User:
         """Find a user by the specified argument"""
         if not kwargs:
             raise InvalidRequestError
