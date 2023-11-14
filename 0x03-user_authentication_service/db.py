@@ -5,8 +5,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from sqlalchemy.exc import InvalidRequestError
-from sqlalchemy.orm.exc import NoResultFound
+# from sqlalchemy.exc import InvalidRequestError
+# from sqlalchemy.orm.exc import NoResultFound
 
 from user import Base, User
 
@@ -39,14 +39,14 @@ class DB:
         self.__session.commit()
         return new_user
 
-    def find_user_by(self, **kwargs) -> User:
-        """Find a user by the specified argument"""
-        if not kwargs:
-            raise InvalidRequestError
-        user = self.__session.query(User).filter_by(**kwargs).first()
-        if not user:
-            raise NoResultFound
-        return user
+    # def find_user_by(self, **kwargs) -> User:
+    #     """Find a user by the specified argument"""
+    #     if not kwargs:
+    #         raise InvalidRequestError
+    #     user = self.__session.query(User).filter_by(**kwargs).first()
+    #     if not user:
+    #         raise NoResultFound
+    #     return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update the user with the specified ID"""
