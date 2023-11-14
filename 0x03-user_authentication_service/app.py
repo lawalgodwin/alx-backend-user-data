@@ -27,7 +27,7 @@ def register_user() -> str:
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
     else:
-        return jsonify({"email": f"<{user}>", "message": "user created"}), 201
+        return jsonify({"email": email, "message": "user created"}), 201
 
 
 if __name__ == "__main__":
