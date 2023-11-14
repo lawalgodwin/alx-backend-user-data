@@ -41,4 +41,3 @@ class Auth:
             return False
         else:
             return bcrypt.checkpw(password.encode(), user.hashed_password)
-        
