@@ -16,8 +16,8 @@ def home():
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
-def register_user() -> str:
-    """User registeration end-point view(handler)"""
+def new_user() -> str:
+    """new User registeration end-point view(handler)"""
     try:
         email = request.form['email']
         password = request.form['password']
@@ -27,7 +27,7 @@ def register_user() -> str:
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
     else:
-        return jsonify({"email": email, "message": "user created"}), 201
+        return jsonify({"email": user.email, "message": "user created"}), 201
 
 
 if __name__ == "__main__":
