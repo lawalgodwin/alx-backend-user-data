@@ -88,8 +88,6 @@ def update_password() -> str:
         reset_token = request.form.get('reset_token')
         new_password = request.form.get('new_password')
         AUTH.get_reset_password_token(email)
-    except KeyError:
-        abort(403)
     except ValueError:
         abort(403)
     AUTH.update_password(reset_token, new_password)
