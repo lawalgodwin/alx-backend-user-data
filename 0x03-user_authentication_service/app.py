@@ -54,7 +54,7 @@ def logout() -> None:
     if user is None:
         abort(403)
     AUTH.destroy_session(user.id)
-    redirect(url_for('home'))
+    redirect('/')
 
 
 if __name__ == "__main__":
